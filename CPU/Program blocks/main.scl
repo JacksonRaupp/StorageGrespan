@@ -1,0 +1,9 @@
+﻿ORGANIZATION_BLOCK "main"
+TITLE = "Main Program Sweep (Cycle)"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+BEGIN
+	"fc"();
+END_ORGANIZATION_BLOCK
+

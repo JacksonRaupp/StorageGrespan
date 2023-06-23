@@ -1,0 +1,90 @@
+﻿FUNCTION "sf" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      id : USInt;
+      prm : USInt;
+      input_AM : Bool;
+      input_P : Bool;
+      input : Bool;
+   END_VAR
+
+   VAR_OUTPUT 
+      output_P : Bool;
+      output : Bool;
+   END_VAR
+
+
+BEGIN
+	"int".tmp[#id].TP
+	(
+	    PT  := T#1s,
+	    IN  := "ext".status[#id] = 1 OR #input
+	);
+	
+	CASE #prm OF
+	    1:  // Partida Direta
+	        CASE "ext".status[#id] OF
+	            0:
+	                #output := false;
+	            1:
+	                IF "int".tmp[#id].Q OR #input THEN
+	                    #output := true;
+	                ELSE
+	                    "ext".status[#id] := 3;
+	                END_IF;
+	            3:
+	                #output := false;
+	            ELSE
+	                "ext".status[#id] := 0;
+	        END_CASE;
+	        
+	    2:  // Partida por Inversor de frequência
+	        CASE "ext".status[#id] OF
+	            0:
+	                #output := false;
+	            1:
+	                IF "int".tmp[#id].Q OR #input THEN
+	                    #output := true;
+	                ELSE
+	                    "ext".status[#id] := 3;
+	                END_IF;
+	            3:
+	                #output := false;
+	            ELSE
+	                "ext".status[#id] := 0;
+	        END_CASE;
+	        
+	        IF NOT "ext".inv[#id] AND #output THEN
+	            #output_P := true;
+	        ELSE
+	            #output_P := false;
+	        END_IF;
+	        
+	    3:  // Partida por Soft Starter
+	        CASE "ext".status[#id] OF
+	            0:
+	                #output := #output_P := false;
+	            1:
+	                IF "int".tmp[#id].Q AND NOT #input_P THEN
+	                    #output_P := true;
+	                ELSIF "int".tmp[#id].Q OR #input THEN
+	                    #output_P := false;
+	                    #output := true;
+	                ELSE
+	                    "ext".status[#id] := 3;
+	                END_IF;
+	            3:
+	                #output := #output_P := false;
+	            ELSE
+	                "ext".status[#id] := 0;
+	        END_CASE;
+	END_CASE;
+	
+	IF "ext".status[#id] = 3 AND NOT "int".pulse[#id] THEN
+	    "int".pulse[#id] := true;
+	ELSIF NOT ("ext".status[#id] = 3) THEN
+	    "int".pulse[#id] := false;
+	END_IF;
+END_FUNCTION
+
