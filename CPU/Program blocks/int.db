@@ -1,0 +1,14 @@
+﻿DATA_BLOCK "int"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+NON_RETAIN
+   VAR 
+      pulse { S7_SetPoint := 'True'} : Array[1..40] of Bool;
+      tmp {InstructionName := 'IEC_TIMER'; LibVersion := '1.0'; S7_SetPoint := 'False'} : Array[1..32] of IEC_TIMER;
+   END_VAR
+
+
+BEGIN
+
+END_DATA_BLOCK
+

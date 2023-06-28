@@ -1,36 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Document>
-  <Engineering version="V17" />
-  <DocumentInfo>
-    <Created>2023-06-23T18:33:38.7231199Z</Created>
-    <ExportSetting>WithDefaults</ExportSetting>
-    <InstalledProducts>
-      <Product>
-        <DisplayName>Totally Integrated Automation Portal</DisplayName>
-        <DisplayVersion>V17</DisplayVersion>
-      </Product>
-      <OptionPackage>
-        <DisplayName>TIA Portal Openness</DisplayName>
-        <DisplayVersion>V17</DisplayVersion>
-      </OptionPackage>
-      <OptionPackage>
-        <DisplayName>TIA Portal Version Control Interface</DisplayName>
-        <DisplayVersion>V17</DisplayVersion>
-      </OptionPackage>
-      <Product>
-        <DisplayName>STEP 7 Professional</DisplayName>
-        <DisplayVersion>V17</DisplayVersion>
-      </Product>
-      <OptionPackage>
-        <DisplayName>STEP 7 Safety</DisplayName>
-        <DisplayVersion>V17</DisplayVersion>
-      </OptionPackage>
-      <Product>
-        <DisplayName>WinCC Advanced / Unified PC</DisplayName>
-        <DisplayVersion>V17</DisplayVersion>
-      </Product>
-    </InstalledProducts>
-  </DocumentInfo>
+  <Engineering version="V18" />
   <SW.Tags.PlcTagTable ID="0">
     <AttributeList>
       <Name>11_CT-5</Name>

@@ -15,80 +15,84 @@ BEGIN
 	    END_FOR;
 	ELSE
 	    IF "ext".trig >= 1 AND "ext".trig <= 32 THEN
-	        IF "ext".status["ext".trig] > 0 THEN
-	            "ext".status["ext".trig] := 0;
+	        IF "ext".trig >= 15 AND "ext".trig <= 22 AND "ext".selector["ext".trig] THEN
+	            "ext".trig := 0;
 	        ELSE
-	            IF NOT "ext".block THEN
-	                "ext".status["ext".trig] += 1;
+	            IF "ext".status["ext".trig] > 0 THEN
+	                "ext".status["ext".trig] := 0;
 	            ELSE
-	                CASE "ext".trig OF
-	                    1:
-	                        ;
-	                    2:
-	                        ;
-	                    3:
-	                        ;
-	                    4:
-	                        ;
-	                    5:
-	                        ;
-	                    6:
-	                        ;
-	                    7:
-	                        ;
-	                    8:
-	                        ;
-	                    9:
-	                        ;
-	                    10:
-	                        ;
-	                    11:
-	                        ;
-	                    12:
-	                        ;
-	                    13:
-	                        ;
-	                    14:
-	                        ;
-	                    15:
-	                        ;
-	                    16:
-	                        ;
-	                    17:
-	                        ;
-	                    18:
-	                        ;
-	                    19:
-	                        ;
-	                    20:
-	                        ;
-	                    21:
-	                        ;
-	                    22:
-	                        ;
-	                    23:
-	                        ;
-	                    24:
-	                        ;
-	                    25:
-	                        ;
-	                    26:
-	                        ;
-	                    27:
-	                        ;
-	                    28:
-	                        ;
-	                    29:
-	                        ;
-	                    30:
-	                        ;
-	                    31:
-	                        ;
-	                    32:
-	                        ;
-	                    ELSE
-	                        "ext".status["ext".trig] += 1;
-	                END_CASE;
+	                IF NOT "ext".block THEN
+	                    "ext".status["ext".trig] += 1;
+	                ELSE
+	                    CASE "ext".trig OF
+	                        1:
+	                            ;
+	                        2:
+	                            ;
+	                        3:
+	                            ;
+	                        4:
+	                            ;
+	                        5:
+	                            ;
+	                        6:
+	                            ;
+	                        7:
+	                            ;
+	                        8:
+	                            ;
+	                        9:
+	                            ;
+	                        10:
+	                            ;
+	                        11:
+	                            ;
+	                        12:
+	                            ;
+	                        13:
+	                            ;
+	                        14:
+	                            ;
+	                        15:
+	                            ;
+	                        16:
+	                            ;
+	                        17:
+	                            ;
+	                        18:
+	                            ;
+	                        19:
+	                            ;
+	                        20:
+	                            ;
+	                        21:
+	                            ;
+	                        22:
+	                            ;
+	                        23:
+	                            ;
+	                        24:
+	                            ;
+	                        25:
+	                            ;
+	                        26:
+	                            ;
+	                        27:
+	                            ;
+	                        28:
+	                            ;
+	                        29:
+	                            ;
+	                        30:
+	                            ;
+	                        31:
+	                            ;
+	                        32:
+	                            ;
+	                        ELSE
+	                            "ext".status["ext".trig] += 1;
+	                    END_CASE;
+	                END_IF;
 	            END_IF;
 	        END_IF;
 	    ELSIF "ext".trig > 0 THEN
@@ -100,377 +104,441 @@ BEGIN
 	REGION Starters
 	    "sf" //01_EL-1 (inversor)
 	    (
-	         id         := 1,
-	         prm        := 2,
-	         input_AM   := false,
-	         input_P    := false,
-	         input      := "iEL-1",
-	         output_P   => "oEL-1s",
-	         output     => "oEL-1f"
+	        id          := 1,
+	        prm         := 2,
+	        inputAM     := false,
+	        inputSoftP  := false,
+	        inputP      := false,
+	        inputSoft   := false,
+	        input       := "iEL-1",
+	        outputP     := "oEL-1s",
+	        output      := "oEL-1f"
 	    );
 	    
 	    "sf" //02_EL-2 (Soft 1 Tipo 1)
 	    (
-	         id         := 2,
-	         prm        := 3,
-	         input_AM   := false,
-	         input_P    := "iEL-2p" AND "iSSP1p",
-	         input      := "iEL-2"  OR  "iSSP1",
-	         output_P   => "oEL-2p",
-	         output     => "oEL-2"
+	        id          := 2,
+	        prm         := 3,
+	        inputAM     := false,
+	        inputSoftP  := "iSSP1p",
+	        inputP      := "iEL-2p",
+	        inputSoft   := "iSSP1",
+	        input       := "iEL-2",
+	        outputP     := "oEL-2p",
+	        output      := "oEL-2"
 	    );
 	    
 	    "sf" //03_EL-3 (inversor)
 	    (
-	         id         := 3,
-	         prm        := 2,
-	         input_AM   := false,
-	         input_P    := false,
-	         input      := "iEL-3",
-	         output_P   => "oEL-3s",
-	         output     => "oEL-3f"
+	        id          := 3,
+	        prm         := 2,
+	        inputAM     := false,
+	        inputSoftP  := false,
+	        inputP      := false,
+	        inputSoft   := false,
+	        input       := "iEL-3",
+	        outputP     := "oEL-3s",
+	        output      := "oEL-3f"
 	    );
 	    
 	    "sf" //04_EL-4 (Soft 1 Tipo 1)
 	    (
-	         id         := 4,
-	         prm        := 3,
-	         input_AM   := false,
-	         input_P    := "iEL-4p" AND "iSSP1p",
-	         input      := "iEL-4"  OR  "iSSP1",
-	         output_P   => "oEL-4p",
-	         output     => "oEL-4"
+	        id          := 4,
+	        prm         := 3,
+	        inputAM     := false,
+	        inputSoftP  := "iSSP1p",
+	        inputP      := "iEL-4p",
+	        inputSoft   := "iSSP1",
+	        input       := "iEL-4",
+	        outputP     := "oEL-4p",
+	        output      := "oEL-4"
 	    );
 	    
 	    "sf" //05_RD-1 (Comum)
 	    (
-	         id         := 5,
-	         prm        := 1,
-	         input_AM   := false,
-	         input_P    := false,
-	         input      := "iRD-1",
-	         output_P   => #null,
-	         output     => "oRD-1"
+	        id          := 5,
+	        prm         := 1,
+	        inputAM     := false,
+	        inputSoftP  := false,
+	        inputP      := false,
+	        inputSoft   := false,
+	        input       := "iRD-1",
+	        outputP     := #null,
+	        output      := "oRD-1"
 	    );
 	    
 	    "sf" //06_RD-2 (Comum)
 	    (
-	         id         := 5,
-	         prm        := 1,
-	         input_AM   := false,
-	         input_P    := false,
-	         input      := "iRD-2",
-	         output_P   => #null,
-	         output     => "oRD-2"
+	        id          := 5,
+	        prm         := 1,
+	        inputAM     := false,
+	        inputSoftP  := false,
+	        inputP      := false,
+	        inputSoft   := false,
+	        input       := "iRD-2",
+	        outputP     := #null,
+	        output      := "oRD-2"
 	    );
 	    
 	    "sf" //07_CT-1 (inversor)
 	    (
-	         id         := 7,
-	         prm        := 2,
-	         input_AM   := false,
-	         input_P    := false,
-	         input      := "iCT-1",
-	         output_P   => "oCT-1s",
-	         output     => "oCT-1f"
+	        id          := 7,
+	        prm         := 2,
+	        inputAM     := false,
+	        inputSoftP  := false,
+	        inputP      := false,
+	        inputSoft   := false,
+	        input       := "iCT-1",
+	        outputP     := "oCT-1s",
+	        output      := "oCT-1f"
 	    );
 	    
 	    "sf" //08_CT-2 (inversor)
 	    (
-	         id         := 8,
-	         prm        := 2,
-	         input_AM   := false,
-	         input_P    := false,
-	         input      := "iCT-2",
-	         output_P   => "oCT-2s",
-	         output     => "oCT-2f"
+	        id          := 8,
+	        prm         := 2,
+	        inputAM     := false,
+	        inputSoftP  := false,
+	        inputP      := false,
+	        inputSoft   := false,
+	        input       := "iCT-2",
+	        outputP     := "oCT-2s",
+	        output      := "oCT-2f"
 	    );
 	    
 	    "sf" //09_CT-3 (inversor)
 	    (
-	         id         := 9,
-	         prm        := 2,
-	         input_AM   := false,
-	         input_P    := false,
-	         input      := "iCT-3",
-	         output_P   => "oCT-3s",
-	         output     => "oCT-3f"
+	        id          := 9,
+	        prm         := 2,
+	        inputAM     := false,
+	        inputSoftP  := false,
+	        inputP      := false,
+	        inputSoft   := false,
+	        input       := "iCT-3",
+	        outputP     := "oCT-3s",
+	        output      := "oCT-3f"
 	    );
 	    
 	    "sf" //10_CT-4 (Soft 2 Tipo 1)
 	    (
-	         id         := 10,
-	         prm        := 3,
-	         input_AM   := false,
-	         input_P    := "iCT-4p" AND "iSSP2p",
-	         input      := "iCT-4"  OR  "iSSP2",
-	         output_P   => "oCT-4p",
-	         output     => "oCT-4"
+	        id          := 10,
+	        prm         := 3,
+	        inputAM     := false,
+	        inputSoftP  := "iSSP2p",
+	        inputP      := "iCT-4p",
+	        inputSoft   := "iSSP2",
+	        input       := "iCT-4",
+	        outputP     := "oCT-4p",
+	        output      := "oCT-4"
 	    );
 	    
 	    "sf" //11_CT-5 (Comum)
 	    (
-	         id         := 11,
-	         prm        := 1,
-	         input_AM   := false,
-	         input_P    := false,
-	         input      := "iCT-5",
-	         output_P   => #null,
-	         output     => "oCT-5"
+	        id          := 11,
+	        prm         := 1,
+	        inputAM     := false,
+	        inputSoftP  := false,
+	        inputP      := false,
+	        inputSoft   := false,
+	        input       := "iCT-5",
+	        outputP     := #null,
+	        output      := "oCT-5"
 	    );
 	    
 	    "sf" //12_PL-1 (Comum)
 	    (
-	         id         := 12,
-	         prm        := 1,
-	         input_AM   := false,
-	         input_P    := false,
-	         input      := "iPL-1",
-	         output_P   => #null,
-	         output     => "oPL-1"
+	        id          := 12,
+	        prm         := 1,
+	        inputAM     := false,
+	        inputSoftP  := false,
+	        inputP      := false,
+	        inputSoft   := false,
+	        input       := "iPL-1",
+	        outputP     := #null,
+	        output      := "oPL-1"
 	    );
 	    
 	    "sf" //13_SC1-EXA (Soft 1 Tipo 2)
 	    (
-	         id         := 13,
-	         prm        := 3,
-	         input_AM   := false,
-	         input_P    := "iSC1-EXAp"  AND "iSSP1p",
-	         input      := "iSC1-EXA"   OR  "iSSP1",
-	         output_P   => "oSC1-EXAp",
-	         output     => "oSC1-EXA"
+	        id          := 13,
+	        prm         := 3,
+	        inputAM     := false,
+	        inputSoftP  := "iSSP1p",
+	        inputP      := "iSC1-EXAp",
+	        inputSoft   := "iSSP1",
+	        input       := "iSC1-EXA",
+	        outputP     := "oSC1-EXAp",
+	        output      := "oSC1-EXA"
 	    );
 	    
 	    "sf" //14_SC1-ECL (Comum)
 	    (
-	         id         := 14,
-	         prm        := 1,
-	         input_AM   := false,
-	         input_P    := false,
-	         input      := "iSC1-ECL",
-	         output_P   => #null,
-	         output     => "oSC1-ECL"
+	        id          := 14,
+	        prm         := 1,
+	        inputAM     := false,
+	        inputSoftP  := false,
+	        inputP      := false,
+	        inputSoft   := false,
+	        input       := "iSC1-ECL",
+	        outputP     := #null,
+	        output      := "oSC1-ECL"
 	    );
 	    
 	    "sf" //15_AE1-SA1 (Soft 2 Tipo 2) (Auto.)
 	    (
-	         id         := 15,
-	         prm        := 3,
-	         input_AM   := "iAE1-SA1a",
-	         input_P    := "iAE1-SA1p"  AND "iSSP2p",
-	         input      := "iAE1-SA1"   OR  "iSSP2",
-	         output_P   => "oAE1-SA1p",
-	         output     => "oAE1-SA1"
+	        id          := 15,
+	        prm         := 3,
+	        inputAM     := "iAE1-SA1a",
+	        inputSoftP  := "iSSP2p",
+	        inputP      := "iAE1-SA1p",
+	        inputSoft   := "iSSP2",
+	        input       := "iAE1-SA1",
+	        outputP     := "oAE1-SA1p",
+	        output      := "oAE1-SA1"
 	    );
 	    
 	    "sf" //16_AE2-SA1 (Soft 1 Tipo 2) (Auto.)
 	    (
-	         id         := 16,
-	         prm        := 3,
-	         input_AM   := "iAE2-SA1a",
-	         input_P    := "iAE2-SA1p"  AND "iSSP1p",
-	         input      := "iAE2-SA1"   OR  "iSSP1",
-	         output_P   => "oAE2-SA1p",
-	         output     => "oAE2-SA1"
+	        id          := 16,
+	        prm         := 3,
+	        inputAM     := "iAE2-SA1a",
+	        inputSoftP  := "iSSP1p",
+	        inputP      := "iAE2-SA1p",
+	        inputSoft   := "iSSP1",
+	        input       := "iAE2-SA1",
+	        outputP     := "oAE2-SA1p",
+	        output      := "oAE2-SA1"
 	    );
 	    
 	    "sf" //17_AE1-SA2 (Soft 2 Tipo 2) (Auto.)
 	    (
-	         id         := 17,
-	         prm        := 3,
-	         input_AM   := "iAE1-SA2a",
-	         input_P    := "iAE1-SA2p"  AND "iSSP2p",
-	         input      := "iAE1-SA2"   OR  "iSSP2",
-	         output_P   => "oAE1-SA2p",
-	         output     => "oAE1-SA2p"
+	        id          := 17,
+	        prm         := 3,
+	        inputAM     := "iAE1-SA2a",
+	        inputSoftP  := "iSSP2p",
+	        inputP      := "iAE1-SA2p"  ,
+	        inputSoft   := "iSSP2",
+	        input       := "iAE1-SA2",
+	        outputP     := "oAE1-SA2p",
+	        output      := "oAE1-SA2"
 	    );
 	    
 	    "sf" //18_AE2-SA2 (Soft 1 Tipo 2) (Auto.)
 	    (
-	         id         := 18,
-	         prm        := 3,
-	         input_AM   := "iAE2-SA2a",
-	         input_P    := "iAE2-SA2p"  AND "iSSP1p",
-	         input      := "iAE2-SA2"   OR  "iSSP1",
-	         output_P   => "oAE2-SA2p",
-	         output     => "oAE2-SA2"
+	        id          := 18,
+	        prm         := 3,
+	        inputAM     := "iAE2-SA2a",
+	        inputSoftP  := "iSSP1p",
+	        inputP      := "iAE2-SA2p",
+	        inputSoft   := "iSSP1",
+	        input       := "iAE2-SA2",
+	        outputP     := "oAE2-SA2p",
+	        output      := "oAE2-SA2"
 	    );
 	    
 	    "sf" //19_AE1-SA3 (Soft 2 Tipo 2) (Auto.)
 	    (
-	         id         := 19,
-	         prm        := 3,
-	         input_AM   := "iAE1-SA3a",
-	         input_P    := "iAE1-SA3p"  AND "iSSP2p",
-	         input      := "iAE1-SA3"   OR  "iSSP2",
-	         output_P   => "oAE1-SA3p",
-	         output     => "oAE1-SA3"
+	        id          := 19,
+	        prm         := 3,
+	        inputAM     := "iAE1-SA3a",
+	        inputSoftP  := "iSSP2p",
+	        inputP      := "iAE1-SA3p",
+	        inputSoft   := "iSSP2",
+	        input       := "iAE1-SA3",
+	        outputP     := "oAE1-SA3p",
+	        output      := "oAE1-SA3"
 	    );
 	    
 	    "sf" //20_AE2-SA3 (Soft 1 Tipo 2) (Auto.)
 	    (
-	         id         := 20,
-	         prm        := 3,
-	         input_AM   := "iAE2-SA3a",
-	         input_P    := "iAE2-SA3p"  AND "iSSP1p",
-	         input      := "iAE2-SA3"   OR  "iSSP1",
-	         output_P   => "oAE2-SA3p",
-	         output     => "oAE2-SA3"
+	        id          := 20,
+	        prm         := 3,
+	        inputAM     := "iAE2-SA3a",
+	        inputSoftP  := "iSSP1p",
+	        inputP      := "iAE2-SA3p",
+	        inputSoft   := "iSSP1",
+	        input       := "iAE2-SA3",
+	        outputP     := "oAE2-SA3p",
+	        output      := "oAE2-SA3"
 	    );
 	    
 	    "sf" //21_AER-SP1 (Soft 2 Tipo 2) (Auto.)
 	    (
-	         id         := 21,
-	         prm        := 3,
-	         input_AM   := "iAER-SP1a",
-	         input_P    := "iAER-SP1p"  AND "iSSP2p",
-	         input      := "iAER-SP1"   OR  "iSSP2",
-	         output_P   => "oAER-SP1p",
-	         output     => "oAER-SP1"
+	        id          := 21,
+	        prm         := 3,
+	        inputAM     := "iAER-SP1a",
+	        inputSoftP  := "iSSP2p",
+	        inputP      := "iAER-SP1p",
+	        inputSoft   := "iSSP2",
+	        input       := "iAER-SP1",
+	        outputP     := "oAER-SP1p",
+	        output      := "oAER-SP1"
 	    );
 	    
 	    "sf" //22_AER-SP2 (Soft 2 Tipo 2) (Auto.)
 	    (
-	         id         := 22,
-	         prm        := 3,
-	         input_AM   := "iAER-SP2a",
-	         input_P    := "iAER-SP2p"  AND "iSSP2p",
-	         input      := "iAER-SP2"   OR  "iSSP2",
-	         output_P   => "oAER-SP2p",
-	         output     => "oAER-SP2"
+	        id          := 22,
+	        prm         := 3,
+	        inputAM     := "iAER-SP2a",
+	        inputSoftP  := "iSSP2p",
+	        inputP      := "iAER-SP2p",
+	        inputSoft   := "iSSP2",
+	        input       := "iAER-SP2",
+	        outputP     := "oAER-SP2p",
+	        output      := "oAER-SP2"
 	    );
 	    
 	    "sf" //23_ESP-EG1 (Comum)
 	    (
-	         id         := 23,
-	         prm        := 1,
-	         input_AM   := false,
-	         input_P    := false,
-	         input      := "iESP-EG1",
-	         output_P   => #null,
-	         output     => "oESP-EG1"
+	        id          := 23,
+	        prm         := 1,
+	        inputAM     := false,
+	        inputSoftP  := false,
+	        inputP      := false,
+	        inputSoft   := false,
+	        input       := "iESP-EG1",
+	        outputP     := #null,
+	        output      := "oESP-EG1"
 	    );
 	    
 	    "sf" //24_ESP-EG2 (Comum)
 	    (
-	         id         := 24,
-	         prm        := 1,
-	         input_AM   := false,
-	         input_P    := false,
-	         input      := "iESP-EG2",
-	         output_P   => #null,
-	         output     => "oESP-EG2"
+	        id          := 24,
+	        prm         := 1,
+	        inputAM     := false,
+	        inputSoftP  := false,
+	        inputP      := false,
+	        inputSoft   := false,
+	        input       := "iESP-EG2",
+	        outputP     := #null,
+	        output      := "oESP-EG2"
 	    );
 	    
 	    "sf" //25_ESP-EG3 (Comum)
 	    (
-	         id         := 25,
-	         prm        := 1,
-	         input_AM   := false,
-	         input_P    := false,
-	         input      := "iESP-EG3",
-	         output_P   => #null,
-	         output     => "oESP-EG3"
+	        id          := 25,
+	        prm         := 1,
+	        inputAM     := false,
+	        inputSoftP  := false,
+	        inputP      := false,
+	        inputSoft   := false,
+	        input       := "iESP-EG3",
+	        outputP     := #null,
+	        output      := "oESP-EG3"
 	    );
 	    
 	    "sf" //26_ELR-1 (Comum)
 	    (
-	         id         := 26,
-	         prm        := 1,
-	         input_AM   := false,
-	         input_P    := false,
-	         input      := "iELR-1",
-	         output_P   => #null,
-	         output     => "oELR-2"
+	        id          := 26,
+	        prm         := 1,
+	        inputAM     := false,
+	        inputSoftP  := false,
+	        inputP      := false,
+	        inputSoft   := false,
+	        input       := "iELR-1",
+	        outputP     := #null,
+	        output      := "oELR-2"
 	    );
 	    
 	    "sf" //27_ELR-2 (Comum)
 	    (
-	         id         := 27,
-	         prm        := 1,
-	         input_AM   := false,
-	         input_P    := false,
-	         input      := "iELR-2",
-	         output_P   => #null,
-	         output     => "oELR-2"
+	        id          := 27,
+	        prm         := 1,
+	        inputAM     := false,
+	        inputSoftP  := false,
+	        inputP      := false,
+	        inputSoft   := false,
+	        input       := "iELR-2",
+	        outputP     := #null,
+	        output      := "oELR-2"
 	    );
 	    
 	    "sf" //28_ELR-3 (Comum)
 	    (
-	         id         := 28,
-	         prm        := 1,
-	         input_AM   := false,
-	         input_P    := false,
-	         input      := "iELR-3",
-	         output_P   => #null,
-	         output     => "oELR-3"
+	        id          := 28,
+	        prm         := 1,
+	        inputAM     := false,
+	        inputSoftP  := false,
+	        inputP      := false,
+	        inputSoft   := false,
+	        input       := "iELR-3",
+	        outputP     := #null,
+	        output      := "oELR-3"
 	    );
 	    
 	    "sf" //29_TOR-1 (Comum)
 	    (
-	         id         := 29,
-	         prm        := 1,
-	         input_AM   := false,
-	         input_P    := false,
-	         input      := "iTOR-1",
-	         output_P   => #null,
-	         output     => "oTOR-1"
+	        id          := 29,
+	        prm         := 1,
+	        inputAM     := false,
+	        inputSoftP  := false,
+	        inputP      := false,
+	        inputSoft   := false,
+	        input       := "iTOR-1",
+	        outputP     := #null,
+	        output      := "oTOR-1"
 	    );
 	    
 	    "sf" //30_EXA-1 (Comum)
 	    (
-	         id         := 30,
-	         prm        := 1,
-	         input_AM   := false,
-	         input_P    := false,
-	         input      := "iEXA-1",
-	         output_P   => #null,
-	         output     => "oEXA-1"
+	        id          := 30,
+	        prm         := 1,
+	        inputAM     := false,
+	        inputSoftP  := false,
+	        inputP      := false,
+	        inputSoft   := false,
+	        input       := "iEXA-1",
+	        outputP     := #null,
+	        output      := "oEXA-1"
 	    );
 	    
 	    "sf" //31_BAT-1 (Comum)
 	    (
-	         id         := 31,
-	         prm        := 1,
-	         input_AM   := false,
-	         input_P    := false,
-	         input      := "iBAT-1",
-	         output_P   => #null,
-	         output     => "oBAT-1"
+	        id          := 31,
+	        prm         := 1,
+	        inputAM     := false,
+	        inputSoftP  := false,
+	        inputP      := false,
+	        inputSoft   := false,
+	        input       := "iBAT-1",
+	        outputP     := #null,
+	        output      := "oBAT-1"
 	    );
 	    
 	    "sf" //32_SLR-1 (Comum)
 	    (
-	         id         := 32,
-	         prm        := 1,
-	         input_AM   := false,
-	         input_P    := false,
-	         input      := "iSLR-1",
-	         output_P   => #null,
-	         output     => "oSLR-1"
-	        );
+	        id          := 32,
+	        prm         := 1,
+	        inputAM     := false,
+	        inputSoftP  := false,
+	        inputP      := false,
+	        inputSoft   := false,
+	        input       := "iSLR-1",
+	        outputP     := #null,
+	        output      := "oSLR-1"
+	    );
 	
 	    REGION Soft Type
 	        
-	        IF "oEL-2p" OR "oEL-4" THEN
+	        IF "oEL-2p" OR "oEL-4p" THEN
 	            "oSSP1t1" := true;
 	        ELSE
 	            "oSSP1t1" := false;
 	        END_IF;
 	        
-	        IF "oSC1-EXA" OR "oAE2-SA1" OR "oAE2-SA2" OR "oAE2-SA3" THEN
+	        IF "oSC1-EXAp" OR "oAE2-SA1p" OR "oAE2-SA2p" OR "oAE2-SA3p" THEN
 	            "oSSP1t2" := true;
 	        ELSE
 	            "oSSP1t2" := false;
 	        END_IF;
 	        
-	        IF "oCT-4" THEN
+	        IF "oCT-4p" THEN
 	            "oSSP2t1" := true;
 	        ELSE
 	            "oSSP2t1" := false;
 	        END_IF;
 	        
-	        IF "oAE1-SA1" OR "oAE1-SA2p" OR "oAE1-SA3" OR "oAER-SP1" OR "oAER-SP2" THEN
+	        IF "oAE1-SA1p" OR "oAE1-SA2p" OR "oAE1-SA3p" OR "oAER-SP1p" OR "oAER-SP2p" THEN
 	            "oSSP2t2" := true;
 	        ELSE
 	            "oSSP2t2" := false;

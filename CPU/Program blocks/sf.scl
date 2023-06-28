@@ -4,13 +4,15 @@ VERSION : 0.1
    VAR_INPUT 
       id : USInt;
       prm : USInt;
-      input_AM : Bool;
-      input_P : Bool;
+      inputAM : Bool;
+      inputSoftP : Bool;
+      inputP : Bool;
+      inputSoft : Bool;
       input : Bool;
    END_VAR
 
-   VAR_OUTPUT 
-      output_P : Bool;
+   VAR_IN_OUT 
+      outputP : Bool;
       output : Bool;
    END_VAR
 
@@ -18,8 +20,8 @@ VERSION : 0.1
 BEGIN
 	"int".tmp[#id].TP
 	(
-	    PT  := T#1s,
-	    IN  := "ext".status[#id] = 1 OR #input
+	    PT := T#1s,
+	    IN := "ext".status[#id] = 1 OR #inputSoft
 	);
 	
 	CASE #prm OF
@@ -54,28 +56,48 @@ BEGIN
 	            ELSE
 	                "ext".status[#id] := 0;
 	        END_CASE;
-	        
-	        IF NOT "ext".inv[#id] AND #output THEN
-	            #output_P := true;
+	        IF NOT "ext".selector[#id] AND #output THEN
+	            #outputP := true;
 	        ELSE
-	            #output_P := false;
+	            #outputP := false;
 	        END_IF;
-	        
+	
 	    3:  // Partida por Soft Starter
+	        IF "ext".selector[#id] THEN
+	            IF #inputAM AND NOT ("ext".status[#id] = 1) THEN
+	                "ext".status[#id] := 1;
+	            ELSIF NOT #inputAM THEN
+	                "ext".status[#id] := 0;
+	            END_IF;
+	        END_IF;
 	        CASE "ext".status[#id] OF
 	            0:
-	                #output := #output_P := false;
+	                #output := #outputP := false;
+	                RESET_TIMER("int".tmp[#id]);
 	            1:
-	                IF "int".tmp[#id].Q AND NOT #input_P THEN
-	                    #output_P := true;
-	                ELSIF "int".tmp[#id].Q OR #input THEN
-	                    #output_P := false;
-	                    #output := true;
+	                IF NOT (#inputSoft OR #output) THEN
+	                    IF (#inputSoftP AND NOT #outputP AND NOT #output) THEN
+	                        "ext".status[#id] := 0;
+	                    ELSIF ("int".tmp[#id].ET < T#10s AND NOT #output) OR
+	                        (#inputP AND #inputSoftP) THEN
+	                        #outputP := true;
+	                    ELSE
+	                        "ext".status[#id] := 3;
+	                    END_IF;
+	                    IF #inputP AND #inputSoftP THEN
+	                        RESET_TIMER("int".tmp[#id]);
+	                    END_IF;
 	                ELSE
-	                    "ext".status[#id] := 3;
+	                    IF "int".tmp[#id].ET < T#1s OR #input THEN
+	                        #output := true;
+	                    ELSE
+	                        "ext".status[#id] := 3;
+	                    END_IF;
+	                    #outputP := false;
 	                END_IF;
+	
 	            3:
-	                #output := #output_P := false;
+	                #output := #outputP := false;
 	            ELSE
 	                "ext".status[#id] := 0;
 	        END_CASE;

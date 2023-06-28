@@ -1,0 +1,12 @@
+﻿DATA_BLOCK "ret"
+{ S7_Optimized_Access := 'FALSE' }
+VERSION : 0.1
+   STRUCT 
+      switch : Array[1..17] of Bool;
+   END_STRUCT;
+
+
+BEGIN
+
+END_DATA_BLOCK
+

@@ -1,0 +1,17 @@
+﻿DATA_BLOCK "ext"
+{ S7_Optimized_Access := 'FALSE' }
+VERSION : 0.1
+NON_RETAIN
+   STRUCT 
+      block : Bool;
+      trig : USInt;
+      selector : Array[1..32] of Bool;
+      status : Array[1..32] of USInt;
+   END_STRUCT;
+
+
+BEGIN
+   block := true;
+
+END_DATA_BLOCK
+
