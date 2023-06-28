@@ -12,6 +12,19 @@ NON_RETAIN
 
 BEGIN
    block := true;
+   selector[1] := true;
+   selector[3] := true;
+   selector[7] := true;
+   selector[8] := true;
+   selector[9] := true;
+   selector[15] := true;
+   selector[16] := true;
+   selector[17] := true;
+   selector[18] := true;
+   selector[19] := true;
+   selector[20] := true;
+   selector[21] := true;
+   selector[22] := true;
 
 END_DATA_BLOCK
 
