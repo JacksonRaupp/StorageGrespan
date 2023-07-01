@@ -25,122 +25,91 @@ BEGIN
 	                    "ext".status["ext".trig] += 1;
 	                ELSE
 	                    CASE "ext".trig OF
-	                        1:
-	                            IF NOT "ret".switch[1]  THEN //chave para cima
-	                                "ext".status["ext".trig] := 1;
-	                            ELSE //chave para baixo
-	                                IF "ext".status[7] = 1 THEN //CT-1
+	                        1: //EL-01
+	                            IF "ret".switch[1]  THEN //chave 01 para baixo
+	                                IF "ext".status[7] = 1 THEN //CT-1 on
 	                                    "ext".status["ext".trig] := 1;
-	                                ELSE
+	                                ELSE //CT-1 off
 	                                    "ext".trig := 0;
 	                                END_IF;
 	                            END_IF;
-	                        2:
-	                            IF NOT "ret".switch[4] THEN //chave para cima
-	                                "ext".status["ext".trig] := 1;
-	                            ELSE //chave para baixo
-	                                IF "ext".status[5] = 1 THEN //RD-1
+	                            
+	                        2: //EL-02
+	                            IF "ret".switch[4] THEN //chave 04 para baixo
+	                                IF "ext".status[5] = 1 THEN //RD-1 on
 	                                    "ext".status["ext".trig] := 1;
-	                                ELSE
+	                                ELSE //RD-1 off
 	                                    "ext".trig := 0;
 	                                END_IF;
 	                            END_IF;
-	                        3:
-	                            IF NOT "ret".switch[10] THEN //chave para cima
-	                                IF NOT "ret".switch[11] THEN //chave para cima
-	                                    IF "ext".status[5] = 1 THEN //RD-1
+	                            
+	                        3: //EL-03
+	                            IF NOT "ret".switch[10] THEN //chave 10 para cima
+	                                IF NOT "ret".switch[11] THEN //chave 11 para cima
+	                                    IF "ext".status[5] = 1 THEN //RD-1 on
 	                                        "ext".status["ext".trig] := 1;
-	                                    ELSE
+	                                    ELSE //RD-1 off
 	                                        "ext".trig := 0;
-	                                    END_IF;
-	                                ELSE //chave para baixo
-	                                    IF NOT "ret".switch[12] THEN //chave para cima
-	                                        IF NOT "iSP1" THEN //SP-1
-	                                            "ext".status["ext".trig] := 1;
-	                                        ELSE
-	                                            "ext".trig := 0;
-	                                        END_IF;
-	                                    ELSE //chave para baixo
-	                                        IF NOT "iSP2" THEN //SP-2
-	                                            "ext".status["ext".trig] := 1;
-	                                        ELSE
-	                                            "ext".trig := 0;
-	                                        END_IF;
 	                                    END_IF;
 	                                END_IF;
-	                            ELSE //chave para baixo
-	                                IF NOT "ret".switch[15] THEN //chave para cima
-	                                    IF "ext".status[10] = 1 THEN //CT-4
+	                            ELSE //chave 10 para baixo
+	                                IF NOT "ret".switch[15] THEN //chave 15 para cima
+	                                    IF "ext".status[10] = 1 THEN //CT-4 on
 	                                        "ext".status["ext".trig] := 1;
-	                                    ELSE
-	                                        "ext".trig := 0;
-	                                    END_IF;
-	                                ELSE //chave para baixo
-	                                    IF NOT ("iTM1a" AND "iTM1b") THEN //TM1
-	                                        "ext".status["ext".trig] := 1;
-	                                    ELSE
+	                                    ELSE //CT-4 off
 	                                        "ext".trig := 0;
 	                                    END_IF;
 	                                END_IF;
 	                            END_IF;
-	                        4:
-	                            IF "ret".switch[16] THEN //chave para cima
-	                                IF "ret".switch[14] THEN //chave para cima
-	                                    IF "ext".status[10] = 1 THEN //CT-4
+	                            
+	                        4: //EL-04
+	                            IF NOT "ret".switch[16] THEN //chave 16 para cima
+	                                IF NOT "ret".switch[14] THEN //chave 14 para cima
+	                                    IF "ext".status[10] = 1 THEN //CT-4 on
 	                                        "ext".status["ext".trig] := 1;
-	                                    ELSE
+	                                    ELSE //CT-4 off
 	                                        "ext".trig := 0;
 	                                    END_IF;
-	                                ELSE //chave para baixo
-	                                    IF "ext".status[12] = 1 THEN //PL-1
+	                                ELSE //chave 14 para baixo
+	                                    IF "ext".status[12] = 1 THEN //PL-1 on
 	                                        "ext".status["ext".trig] := 1;
-	                                    ELSE
+	                                    ELSE //PL-1 off
 	                                        "ext".trig := 0;
 	                                    END_IF;
 	                                END_IF;
-	                            ELSE //chave para baixo
-	                                IF NOT ("iTM1a" AND "iTM1b") THEN //TM1
+	                            END_IF;
+	                            
+	                        6: //RD-02
+	                            IF NOT "ret".switch[5] THEN //chave 05 para cima
+	                                IF "ext".status[2] = 1 THEN //EL-2 on
 	                                    "ext".status["ext".trig] := 1;
-	                                ELSE
+	                                ELSE //EL-2 off
+	                                    "ext".trig := 0;
+	                                END_IF;
+	                            ELSE //chave 05 para baixo
+	                                IF "ext".status[3] = 1 THEN //EL-3 on
+	                                    "ext".status["ext".trig] := 1;
+	                                ELSE //EL-3 off
 	                                    "ext".trig := 0;
 	                                END_IF;
 	                            END_IF;
-	                        5:
-	                            IF "ext".status[13] = 1 THEN //SC1-EXA
-	                                "ext".status["ext".trig] := 1;
-	                            ELSE
-	                                "ext".trig := 0;
-	                            END_IF;
-	                        6:
-	                            IF NOT "ret".switch[5] THEN //chave para cima
-	                                IF "ext".status[2] = 1 THEN //EL-2
-	                                    "ext".status["ext".trig] := 1;
-	                                ELSE
-	                                    "ext".trig := 0;
-	                                END_IF;
-	                            ELSE //chave para baixo
-	                                IF "ext".status[3] = 1 THEN //EL-3
-	                                    "ext".status["ext".trig] := 1;
-	                                ELSE
-	                                    "ext".trig := 0;
-	                                END_IF;
-	                            END_IF;
-	                        7:
-	                            IF NOT "ret".switch[2] THEN //chave para cima
-	                                IF NOT "ret".switch[3] THEN //chave para cima
-	                                    IF "ext".status[2] = 1 THEN //EL-2
+	                            
+	                        7: //CT-01
+	                            IF NOT "ret".switch[2] THEN //chave 02 para cima
+	                                IF NOT "ret".switch[3] THEN //chave 03 para cima
+	                                    IF "ext".status[2] = 1 THEN //EL-2 on
 	                                        "ext".status["ext".trig] := 1;
-	                                    ELSE
+	                                    ELSE //EL-2 off
 	                                        "ext".trig := 0;
 	                                    END_IF;
-	                                ELSE //chave para baixo
-	                                    IF "ext".status[12] = 1 THEN //PL-1
+	                                ELSE //chave 03 para baixo
+	                                    IF "ext".status[12] = 1 THEN //PL-1 on
 	                                        "ext".status["ext".trig] := 1;
-	                                    ELSE
+	                                    ELSE //PL-1 off
 	                                        "ext".trig := 0;
 	                                    END_IF;
 	                                END_IF;
-	                            ELSE //chave para baixo
+	                            ELSE //chave 02 para baixo
 	                                IF NOT "ret".switch[6] THEN //chave para cima
 	                                    IF "ext".status[3] = 1 THEN //EL-3
 	                                        "ext".status["ext".trig] := 1;
@@ -155,138 +124,122 @@ BEGIN
 	                                    END_IF;
 	                                END_IF;
 	                            END_IF;
-	                        8:
-	                            IF "ret".switch[8] THEN //chave para cima
-	                                IF "ext".status[2] = 1 THEN //EL-2
+	                            
+	                        8: //CT-02
+	                            IF NOT "ret".switch[8] THEN //chave 08 para cima
+	                                IF "ext".status[2] = 1 THEN //EL-2 on
 	                                    "ext".status["ext".trig] := 1;
-	                                ELSE
+	                                ELSE //EL-2 off
 	                                    "ext".trig := 0;
 	                                END_IF;
-	                            ELSE //chave para baixo
-	                                IF "ext".status[3] = 1 THEN //EL-3
+	                            ELSE //chave 08 para baixo
+	                                IF "ext".status[3] = 1 THEN //EL-3 on
 	                                    "ext".status["ext".trig] := 1;
-	                                ELSE
-	                                    "ext".trig := 0;
-	                                END_IF;
-	                            END_IF;
-	                        9:
-	                            IF "ret".switch[13] THEN //chave para cima
-	                                IF "ext".status[2] = 1 THEN //EL-2
-	                                    "ext".status["ext".trig] := 1;
-	                                ELSE //chave para baixo
-	                                    "ext".trig := 0;
-	                                END_IF;
-	                            ELSE //chave para baixo
-	                                IF "ext".status[3] = 1 THEN //EL-3
-	                                    "ext".status["ext".trig] := 1;
-	                                ELSE
+	                                ELSE //EL-3 off
 	                                    "ext".trig := 0;
 	                                END_IF;
 	                            END_IF;
-	                        10:
-	                            IF "ext".status[23] = 1 OR
-	                                "ext".status[24] = 1 OR
-	                                "ext".status[24] = 1
-	                            THEN //ESP1..3
-	                                "ext".status["ext".trig] := 1;
-	                            ELSE
-	                                "ext".trig := 0;
-	                            END_IF;
-	                        11:
-	                            IF "ret".switch[17] THEN //chave para cima
-	                                IF "ext".status[3] = 1 THEN //EL-3
+	                            
+	                        9: //CT-03
+	                            IF NOT "ret".switch[13] THEN //chave 13 para cima
+	                                IF "ext".status[2] = 1 THEN //EL-2 on
 	                                    "ext".status["ext".trig] := 1;
-	                                ELSE
+	                                ELSE //EL-2 off
 	                                    "ext".trig := 0;
 	                                END_IF;
-	                            ELSE //chave para baixo
-	                                IF "ext".status[4] = 1 THEN //EL-4
+	                            ELSE //chave 13 para baixo
+	                                IF "ext".status[3] = 1 THEN //EL-3 on
 	                                    "ext".status["ext".trig] := 1;
-	                                ELSE
+	                                ELSE //EL-3 off
 	                                    "ext".trig := 0;
 	                                END_IF;
 	                            END_IF;
-	                        12:
-	                            IF "ext".status[26] = 1 AND
-	                                "ext".status[27] = 1 THEN //ELR1e2
-	                                IF "ret".switch[7] THEN //chave para cima
-	                                    IF "ext".status[2] = 1 THEN //EL-2
+	                            
+	                        11: //CT-05
+	                            IF NOT "ret".switch[17] THEN //chave 17 para cima
+	                                IF "ext".status[3] = 1 THEN //EL-3 on
+	                                    "ext".status["ext".trig] := 1;
+	                                ELSE //EL-3 off
+	                                    "ext".trig := 0;
+	                                END_IF;
+	                            ELSE //chave 17 para baixo
+	                                IF "ext".status[4] = 1 THEN //EL-4 on
+	                                    "ext".status["ext".trig] := 1;
+	                                ELSE //EL-4 off
+	                                    "ext".trig := 0;
+	                                END_IF;
+	                            END_IF;
+	                            
+	                        12: //PL-1
+	                            IF "ext".status[26] = 1 AND //ELR-1 on E
+	                                "ext".status[27] = 1 THEN //ELR-2 on
+	                                IF NOT "ret".switch[7] THEN //chave 07 para cima
+	                                    IF "ext".status[2] = 1 THEN //EL-2 on
 	                                        "ext".status["ext".trig] := 1;
-	                                    ELSE //chave para baixo
+	                                    ELSE //EL-2 off
 	                                        "ext".trig := 0;
 	                                    END_IF;
-	                                ELSE //chave para baixo
-	                                    IF "ret".switch[9] THEN //chave para cima
-	                                        IF "ext".status[3] = 1 THEN //EL-3
+	                                ELSE //chave 07 para baixo
+	                                    IF NOT "ret".switch[9] THEN //chave 09 para cima
+	                                        IF "ext".status[3] = 1 THEN //EL-3 on
 	                                            "ext".status["ext".trig] := 1;
-	                                        ELSE
+	                                        ELSE //EL-3 off
 	                                            "ext".trig := 0;
 	                                        END_IF;
-	                                    ELSE //chave para baixo
-	                                        IF "ext".status[4] = 1 THEN //EL-4
+	                                    ELSE //chave 09 para baixo
+	                                        IF "ext".status[4] = 1 THEN //EL-4 on
 	                                            "ext".status["ext".trig] := 1;
-	                                        ELSE
+	                                        ELSE //EL-4 off
 	                                            "ext".trig := 0;
 	                                        END_IF;
 	                                    END_IF;
 	                                END_IF;
-	                            ELSE //chave para baixo
+	                            ELSE //ELR-1 off ou ELR-2 off
 	                                "ext".trig := 0;
 	                            END_IF;
-	                        13:
-	                            IF "ext".status[14] = 1 THEN //SC1-ECL
+	                            
+	                        14: //SC1-ECL
+	                            IF "ext".status[6] = 1 THEN //RD-2 on
 	                                "ext".status["ext".trig] := 1;
-	                            ELSE
+	                            ELSE //RD-2 off
 	                                "ext".trig := 0;
 	                            END_IF;
-	                        14:
-	                            IF "ext".status[6] = 1 THEN //RD-2
+	                            
+	                        23: //ESP-EG1
+	                            IF NOT "iSA1" THEN //SA-1 nível baixo
 	                                "ext".status["ext".trig] := 1;
-	                            ELSE
+	                            ELSE //SA-1 nível alto
 	                                "ext".trig := 0;
 	                            END_IF;
-	                        23:
-	                            IF "iSA1" THEN //SA-1
+	                            
+	                        24: //ESP-EG2
+	                            IF NOT "iSA2" THEN //SA-2 nível baixo
 	                                "ext".status["ext".trig] := 1;
-	                            ELSE
+	                            ELSE //SA-2 nível alto
 	                                "ext".trig := 0;
 	                            END_IF;
-	                        24:
-	                            IF "iSA2" THEN //SA-2
+	                            
+	                        25: //ESP-EG3
+	                            IF NOT "iSA3" THEN //SA-3 nível baixo
 	                                "ext".status["ext".trig] := 1;
-	                            ELSE
+	                            ELSE //SA-3 nível alto
 	                                "ext".trig := 0;
 	                            END_IF;
-	                        25:
-	                            IF "iSA3" THEN //SA-3
+	                            
+	                        27: //ELR-2
+	                            IF "ext".status[31] = 1 THEN //BAT-1 on
 	                                "ext".status["ext".trig] := 1;
-	                            ELSE
+	                            ELSE //BAT-1 off
 	                                "ext".trig := 0;
 	                            END_IF;
-	                        27:
-	                            IF "ext".status[31] = 1 THEN //BAT-1
+	                            
+	                        29: //TOR-1
+	                            IF "ext".status[28] = 1 THEN //ELR-3 on
 	                                "ext".status["ext".trig] := 1;
-	                            ELSE
+	                            ELSE //ELR-3 off
 	                                "ext".trig := 0;
 	                            END_IF;
-	                        28:
-	                            IF "ext".status[32] = 1 THEN //SLR-1
-	                                "ext".status["ext".trig] := 1;
-	                            ELSE
-	                                "ext".trig := 0;
-	                            END_IF;
-	                        29:
-	                            IF "ext".status[28] = 1 THEN //ELR-3
-	                                "ext".status["ext".trig] := 1;
-	                            ELSE
-	                                "ext".trig := 0;
-	                            END_IF;
-	                        32:
-	                            IF "ext".status[4] = 1 THEN //EL-4
-	                                "ext".status["ext".trig] := 1;
-	                            ELSE
-	                                "ext".trig := 0;
-	                            END_IF;
+	                            
 	                        ELSE
 	                            "ext".status["ext".trig] := 1;
 	                    END_CASE;
